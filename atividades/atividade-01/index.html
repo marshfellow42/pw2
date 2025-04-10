@@ -54,11 +54,11 @@
     document.getElementById('searchButton').addEventListener('click', function () {
       const cep = document.getElementById('cepInput').value.trim();
       if (cep && cep.length > 7 && cep.length < 9 && cep > 0) {
-        fetch(`https://brasilapi.com.br/api/cep/v2/${cep}`)
+        fetch(`https://viacep.com.br/ws/${cep}/json/`)
           .then((res) => res.json())
           .then((data) => {
-            if (data && data.street) {
-              document.getElementById('endereco').value = data.street;
+            if (data && data.logradouro) {
+              document.getElementById('endereco').value = data.logradouro;
             } else {
               document.getElementById('endereco').value = 'Endereço não encontrado.';
             }
