@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <title>
+    Formulário
+  </title>
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="position-relative" style="min-height: 80vh;">
+    <div class="position-absolute top-50 start-50 translate-middle" style="width: 50%;">
+      <form>
+        <div class="mb-3">
+          <label class="form-label">Matrícula</label>
+          <input type="text" class="form-control" id="matricula">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Nome</label>
+          <input type="text" class="form-control" id="nome">
+        </div>
+        <label for="cepInput" class="form-label me-2">CEP</label>
+        <div class="mb-3 d-flex align-items-center">
+          <input type="text" class="form-control me-2" id="cepInput" placeholder="Insira o CEP">
+          <button type="button" class="btn btn-primary" id="searchButton">
+            <i class="bi bi-search"></i>
+          </button>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Endereço</label>
+          <input type="text" class="form-control" id="endereco" readonly>
+        </div>
+        <div class="d-flex justify-content-end">
+          <button type="button" class="btn btn-primary px-4" id="okButton">Ok</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-mask-plugin@1.14.16/dist/jquery.mask.min.js"></script>
+
+  <script>
+    $(document).ready(function(){
+      $('#matricula').mask('00000000000000');
+      $('#cepInput').mask('00000000');
+    });
+
+    document.getElementById('searchButton').addEventListener('click', function () {
+      const cep = document.getElementById('cepInput').value.trim();
+      if (cep && cep.length > 7 && cep.length < 9 && cep > 0) {
+        fetch(`https://viacep.com.br/ws/${cep}/json/`)
+          .then((res) => res.json())
+          .then((data) => {
+            if (data && data.logradouro) {
+              document.getElementById('endereco').value = data.logradouro;
+            } else {
+              document.getElementById('endereco').value = 'Endereço não encontrado.';
+            }
+          })
+          .catch((error) => {
+            console.error('Error fetching data:', error);
+            document.getElementById('endereco').value = 'Erro em pegar o endereço.';
+          });
+      } else {
+        alert('Por favor, insira um CEP válido');
+      }
+    });
+
+    document.getElementById('okButton').addEventListener('click', function () {
+      const matricula = document.getElementById('matricula').value.trim();
+      const nome = document.getElementById('nome').value.trim();
+      const cep = document.getElementById('cepInput').value.trim();
+      const endereco = document.getElementById('endereco').value.trim();
+      if (matricula.length == 0 || matricula.length < 3) {
+        alert('Por favor, insira uma matrícula válida');
+      }
+      if (nome.length == 0 || nome.length < 3) {
+        alert('Por favor, insira um nome válido');
+      }
+      if (cep.length == 0 || cep.length < 3) {
+        alert('Por favor, insira um CEP válido');
+      }
+      if (endereco.length == 0 || endereco == 'Erro em pegar o endereço.' || endereco == 'Endereço não encontrado.') {
+        alert('Por favor, insira um endereço válido');
+      }
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+    crossorigin="anonymous"></script>
+
+</body>
+
+</html>
