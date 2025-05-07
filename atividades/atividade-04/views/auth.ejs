@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <title><%= title %></title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="d-flex justify-content-start">
+    <a href="/" class="btn btn-outline-secondary px-4">
+      <i class="bi bi-arrow-left"></i>
+      Voltar
+    </a>
+  </div>
+  <div class="position-relative" style="min-height: 80vh;">
+    <div class="position-absolute top-50 start-50 translate-middle" style="width: 50%;">
+      <form action="/auth" method="POST">
+        <div class="mb-3">
+            <label class="form-label">Usuário</label>
+            <input type="text" class="form-control" id="username" name="username" value="aluno" placeholder="Insira o seu nome de usuário">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Senha</label>
+            <input type="text" class="form-control" id="password" name="password" placeholder="Insira a sua senha">
+        </div>
+        <div class="d-flex justify-content-center">
+          <button type="submit" class="btn btn-primary px-4" id="okButton">Ok</button>
+        </div>
+        <p id="resposta" style="color: green;" class="text-center mt-4"></p>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-mask-plugin@1.14.16/dist/jquery.mask.min.js"></script>
+
+  <script>
+    $(document).ready(function(){
+      $('#anoInput').mask('0000');
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+    crossorigin="anonymous"></script>
+
+</body>
+
+</html>

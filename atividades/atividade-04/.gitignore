@@ -1,0 +1,51 @@
+# Node.js
+node_modules/
+npm-debug.log*
+package-lock.json
+
+# Logs
+logs
+*.log
+logs/**/*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Coverage directories used by testing frameworks
+coverage/
+
+# Temporary files and directories
+*.tmp
+*.temp
+temp/
+tmp/
+
+# Build output
+build/
+dist/
+
+# Editor-specific settings
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw*
+
+# Yarn-specific
+.yarn/
+.yarnrc
+.pnp.*
+
+# Optional npm cache directory
+.npm/
+
+# Bower dependency folder (if used)
+bower_components/
