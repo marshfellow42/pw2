@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+  </head>
+  <body>
+    <header class="col-auto d-flex align-items-center">
+      <h1 class="mb-3"><%= title %></h1>
+      <a href="/add" class="btn btn-primary ms-auto">Adicionar</a>
+      <a href="/auth" class="btn btn-primary ms-auto">Autenticar</a>
+    </header>
+
+    <main>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Placa</th>
+            <th scope="col">Marca</th>
+            <th scope="col">Modelo</th>
+            <th scope="col">Cor</th>
+            <th scope="col">Ano_fabric</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% var lista_array = []; lista_array = lista; var qt_itens = 5; %>
+
+          <% for (var i = qt_itens * pg_atual; i < lista_array.length && i < qt_itens * (pg_atual + 1); i++) {
+            var item = lista_array[i]; %>
+            <tr>
+              <th scope="row"><%= i + 1 %></th>
+              <td><%= item.placa %></td>
+              <td><%= item.marca %></td>
+              <td><%= item.modelo %></td>
+              <td><%= item.cor %></td>
+              <td><%= item.ano_fabric %></td>
+              <td>
+                <form action="/remove" method="post">
+                  <input type="hidden" name="placa" value="<%= item.placa %>">
+                  <button type="submit" class="btn btn-danger">Remover</button>
+                </form>
+              </td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </main>
+
+    <nav class="d-flex justify-content-center">
+      <ul class="pagination">
+        <li class="page-item">
+          <% if(pg_atual > 0) { %>
+            <button class="page-link" onclick="previousPage()">
+              <span aria-hidden="true">&laquo;</span>
+            </button>
+          <% } %>
+        </li>
+        <% for (var i = 0; i < Math.ceil(lista_array.length / qt_itens); i++) { %>
+          <% if(i == pg_atual) { %>
+            <li class="page-item active">
+          <% } else { %>
+            <li class="page-item">
+          <% } %>
+          <% if(i == 0) { %>
+            <a class="page-link" href="/"><%= i + 1 %></a>
+          <% } else { %>
+            <a class="page-link" href="/?pg=<%= i %>"><%= i + 1 %></a>
+          <% } %>
+          </li>
+        <% } %>
+        <li class="page-item">
+          <% if(pg_atual < Math.floor(lista_array.length / qt_itens)) { %>
+            <button class="page-link" onclick="nextPage()">
+              <span aria-hidden="true">&raquo;</span>
+            </button>
+          <% } %>
+        </li>
+      </ul>
+    </nav>
+
+    <script>
+        var currentPage = <%= pg_atual %>;
+        function nextPage() {
+          currentPage++;
+          window.location.href = `/?pg=${currentPage}`;
+        }
+
+        function previousPage() {
+          currentPage--;
+          window.location.href = `/?pg=${currentPage}`;
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+  </body>
+</html>
