@@ -1,0 +1,68 @@
+<header class="d-flex">
+    <h1>Olá!&nbsp;</h1>
+    {{#if loggedIn}}
+        <h1>{{user}}&nbsp;</h1>
+        {{!--
+          {{#if nivel_de_acesso}}
+              <h1>Administrador</h1>
+          {{else}}
+              <h1>Usuário comum</h1>
+          {{/if}}
+        --}}
+        <div class="ms-auto flex-row-reverse">
+            <a href="logout" class="btn btn-outline-danger">Sair</a>
+        </div>
+    {{else}}
+        <h1>Visitante</h1>
+        <div class="ms-auto flex-row-reverse">
+            <a href="login" class="btn btn-outline-success px-4">Login</a>
+            <a href="cadastro" class="btn btn-outline-danger">Cadastro</a>
+        </div>
+    {{/if}}
+</header>
+
+{{#if nivel_de_acesso}}
+    <nav class="d-flex flex-row-reverse">
+        <a href="criarMaterial" class="btn btn-primary px-4">Criar</a>
+    </nav>
+{{/if}}
+
+{{#if loggedIn}}
+<main>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nome do Produto</th>
+          <th scope="col">Quantidade</th>
+          {{#if nivel_de_acesso}}
+            <th scope="col"></th>
+            <th scope="col"></th>
+          {{/if}}
+        </tr>
+      </thead>
+      <tbody>
+        {{#each listagem}}
+            <tr>
+                <th scope="row">{{id}}</th>
+                <td>{{nome_do_material}}</td>
+                <td>{{quantidade}}</td>
+                {{#if ../nivel_de_acesso}}
+                    <td>
+                        <a href="editarMaterial?id={{id}}" class="btn btn-warning">Editar</a>
+                    </td>
+                    <td>
+                        <form action="deletarMaterial?id={{id}}" method="post">
+                          <button type="submit" class="btn btn-danger">Deletar</button>
+                        </form>
+                    </td>
+                {{/if}}
+            </tr>
+        {{/each }}
+      </tbody>
+    </table>
+</main>
+{{else}}
+<h3 class="mt-4" style="text-align: center;">Você não está logado</h3>
+{{/if}}
+

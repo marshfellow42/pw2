@@ -1,4 +1,3 @@
-# Atividade 03
+# Atividade 05
 
-Corrigir o código de atualização do listar, para que a paginação funcione corretamente.
-Evitar de dar erro quando aperta no botão "prox" e não tem mais 5 placas para listar
+Registrar-se no firebase e fazer login usando email e senha
