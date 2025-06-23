@@ -22,7 +22,7 @@ router.get('/add', async function(req, res, next) {
 
 router.get('/encontrarTodos', async function(req, res, next) {
   try {
-    const [rows] = await db.query('SELECT id, nome, email, createdAt, updatedAt, deletedAt FROM usuarios WHERE deletedAt IS NULL');
+    const [rows] = await db.query('SELECT * FROM usuarios WHERE deletedAt IS NULL');
     res.render('index', { title: 'Usuários', lista: rows });
   } catch (err) {
     res.status(500).json({ error: err.message });
