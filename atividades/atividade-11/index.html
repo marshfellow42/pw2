@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        form {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        label {
+            min-width: 300px;
+        }
+
+        input {
+            flex: 1;
+            padding: 5px;
+        }
+
+        button {
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <form>
+        <label>Email:</label>
+        <input type="text" name="email" required pattern="^[^\.\-][\w!#$%&'*\/=?^_+\-`{|}~\.]*[^\.\-][@][^\.\-][\w\.\-]*[^\.\-]$">
+        <button type="submit">Submit</button>
+    </form>
+
+    <form>
+        <label>Placa de carro modelo Mercosul:</label>
+        <input type="text" name="placa_de_carro" required pattern="([A-Z]{2}[0-9]{3}[A-Z]{2})|([A-Z]{3}[0-9][A-Z][0-9]{2})|([A-Z]{4}[0-9]{3})|([A-Z]{3}[0-9]{4})">
+        <button type="submit">Submit</button>
+    </form>
+
+    <form>
+        <label>CPF:</label>
+        <input type="text" name="cpf" required pattern="^[0-9]{3}\.[0-9]{3}\.[0-9]{3}\-[0-9]{2}">
+        <button type="submit">Submit</button>
+    </form>
+
+    <form>
+        <label>Matrícula de um integrado em Informática:</label>
+        <input type="text" name="matricula_info" required pattern=".{5}011060.{3}">
+        <button type="submit">Submit</button>
+    </form>
+
+    <form>
+        <label>IFCE - Campus (insira aqui):</label>
+        <input type="text" name="campus_IFCE" required pattern="^IFCE \- Campus .+">
+        <button type="submit">Submit</button>
+    </form>
+</body>
+
+</html>
+
+<script>
+    const form = document.querySelector("form");
+    form.addEventListener("submit", function (e) {
+        const input = form.querySelector("input");
+        if (!input.checkValidity()) {
+            e.preventDefault();
+            input.reportValidity();
+        }
+    });
+</script>
